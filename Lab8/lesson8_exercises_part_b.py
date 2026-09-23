@@ -17,7 +17,6 @@ class Movie:
             return True
         return False
 
-
 movie_2 = Movie("John Carter", "Andrew Stanton", 6.6)
 print(f"Title: {movie_2.title}, Director: {movie_2.director}, Rating: {movie_2.rating}")
 
