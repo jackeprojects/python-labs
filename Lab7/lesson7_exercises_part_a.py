@@ -41,9 +41,9 @@ book_6 = Book("Dune", "Frank Herbert", 412)
 print("They are the same" if book_5 is book_6 else "They are NOT the same")
 
 
-# 4. Add a defualt value to at least one __init__ parameter
+# 4. Add a default value to at least one __init__ parameter
 # See Laptop class above, parameter ram_gb has a default value of 8
 
 
-# 5. Crate one object using keyword arguments
+# 5. Create one object using keyword arguments
 book_7 = Book(title="The Hunger Games", author="Suzanne Collins", pages=374)
