@@ -12,9 +12,6 @@ class Report:
 # 2. Create a SalesReport(Report) and override get_summary()
 # 3. Inside the overriden method, call the base implementation using super(), and add SalesReport-specific information
 class SalesReport(Report):
-    def __init__(self):
-        super().__init__()
-
     def get_summary(self):
         return f"{super().get_summary()} Sales: $100,000 in revenue"  # Task 3: call base implementation with super()
 
