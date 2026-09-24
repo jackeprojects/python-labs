@@ -12,17 +12,11 @@ class Notification:
 # 2. Create EmailNotification(Notification) and SMSNotification(Notification)
 # 3. Override send() in both subclasses so each returns a different message
 class EmailNotification(Notification):
-    def __init__(self):
-        super().__init__()
-
     def send(self):  # Task 3: Overriding base class' send() method
         return "This is an email notification!"
 
 
 class SMSNotification(Notification):
-    def __init__(self):
-        super().__init__()
-
     def send(self):  # Task 3: Overriding base class' send() method
         return "This is a SMS notification!"
 
