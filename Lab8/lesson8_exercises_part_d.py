@@ -11,18 +11,12 @@ class Employee:
 
 # 2. Create Developer(Employee) and add a method that only Developer has
 class Developer(Employee):
-    def __init__(self, name):
-        super().__init__(name)
-
     def start_coding(self):
         return f"{self.name} is now coding!"
 
 
 # 3. Create another Employee subclass and give it its own sub-class specific method
 class CoffeeBringer(Employee):
-    def __init__(self, name):
-        super().__init__(name)
-
     def get_coffee(self):
         return f"{self.name} is now bringing coffee!"
 
