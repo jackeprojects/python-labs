@@ -1,4 +1,4 @@
-# Part B, Polymorphism with inheritence
+# Part B, Polymorphism with inheritance
 
 # 1. Create a base class Document with title attribute and a method describe()
 class Document:
