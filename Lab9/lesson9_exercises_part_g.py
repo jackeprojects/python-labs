@@ -24,3 +24,12 @@ print(f"This {computer_1.brand} computer comes with a {computer_1.cpu.model}")
 # 5. In comments, explain why "Computer HAS-A CPU" makes more sense than "Computer IS-A CPU"
 # Because a CPU is a component of a computer, not the whole computer.
 # which is why it's better to pass CPU in as an attribute of Computer, instead of inheriting CPU
+
+
+# 6. For each pair below, write whether you would most likely use inheritance (IS-A) or composition (HAS-A)
+# Car / Engine, Manager / Employee, Course / Teacher, Phone / Device
+
+# Car/Engine - HAS-A, a car HAS an engine
+# Manager / Employee - IS-A, a manager is an employee
+# Course / Teacher - HAS-A, a course has a teacher that teaches it
+# Phone / Device - IS-A, a phone is a type of device
