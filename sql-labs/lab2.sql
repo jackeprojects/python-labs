@@ -35,4 +35,7 @@ CREATE TABLE reviews (
 );
 
 -- 6. Test reviews, try to add a view rating of 6. What happens?
---INSERT INTO reviews VALUES (1, 1, 6, 'The best'); -- CHECK constraint failed
+-- INSERT INTO reviews VALUES (1, 1, 6, 'The best'); -- CHECK constraint failed, rating can't be above 5
+
+-- 7. Test reviews, try to add a review for product 50. What happens?
+-- INSERT INTO reviews VALUES (50, 50, 2, 'Not the best'); -- FOREIGN KEY constraint failed, there is no product with the id of 50
