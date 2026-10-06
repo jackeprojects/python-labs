@@ -8,9 +8,10 @@ CREATE TABLE books (
 	author TEXT,
 	year INTEGER
 );
-DROP TABLE books;
 
 -- 2. Add a rule to books so year must be greater than 1400
+DROP TABLE books;
+
 CREATE TABLE books (
 	book_id INTEGER PRIMARY KEY,
 	title TEXT NOT NULL,
@@ -23,3 +24,15 @@ ALTER TABLE books ADD COLUMN isbn TEXT;
 
 -- 4. Delete the books TABLE
 DROP TABLE books;
+
+-- 5. Create table reviews, with review_id, rating (1-5), comment
+CREATE TABLE reviews (
+	review_id INTEGER PRIMARY KEY,
+	product_id INTEGER,
+	rating INTEGER CHECK (rating BETWEEN 1 AND 5),
+	comment TEXT,
+	FOREIGN KEY (product_id) REFERENCES products (product_id)
+);
+
+-- 6. Test reviews, try to add a view rating of 6. What happens?
+--INSERT INTO reviews VALUES (1, 1, 6, 'The best'); -- CHECK constraint failed
