@@ -20,3 +20,15 @@ ORDER BY order_date DESC;
 SELECT name, category, order_items.*
 FROM products INNER JOIN order_items
 ON order_items.product_id = products.product_id;
+
+-- 5. Show order_id and product name for orders that contained Shoes
+SELECT order_id, name
+FROM order_items INNER JOIN products
+ON products.product_id = order_items.product_id
+WHERE category = 'Shoes';
+
+-- 6. Show the full receipt for order 10, product name, quantity, unit price, and line total
+SELECT name, quantity, unit_price, unit_price * quantity AS line_total
+FROM products INNER JOIN order_items
+ON order_items.product_id = products.product_id
+WHERE order_id = 10;
