@@ -34,3 +34,6 @@ WHERE order_id = 7;
 -- I have to delete the order_items first since its order_id key is a FOREIGN KEY and points towards order_id in orders
 DELETE FROM orders
 WHERE order_id = 7;
+
+-- 9. Revert Changes so data matches the original data
+SELECT COUNT(*) FROM orders; -- gives 15
