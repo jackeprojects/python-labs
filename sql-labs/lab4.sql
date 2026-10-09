@@ -32,3 +32,18 @@ SELECT name, quantity, unit_price, unit_price * quantity AS line_total
 FROM products INNER JOIN order_items
 ON order_items.product_id = products.product_id
 WHERE order_id = 10;
+
+-- 7. Show which customers have bought a Hoodie Black (first name and order date)
+SELECT first_name, order_date
+FROM customers INNER JOIN orders
+ON customers.customer_id = orders.customer_id
+INNER JOIN order_items
+ON order_items.order_id = orders.order_id
+INNER JOIN products
+ON order_items.product_id = products.product_id
+WHERE name = 'Hoodie Black';
+
+-- 8. Show all customers and their orders. including with no orders
+SELECT *
+FROM customers LEFT JOIN orders
+ON customers.customer_id = orders.customer_id;
