@@ -47,3 +47,19 @@ WHERE name = 'Hoodie Black';
 SELECT *
 FROM customers LEFT JOIN orders
 ON customers.customer_id = orders.customer_id;
+
+-- 9. Which products have never been sold?
+SELECT *
+FROM products LEFT JOIN order_items
+ON products.product_id = order_items.product_id
+WHERE order_items.order_id IS NULL;
+
+-- 10. Show customers from Uppsala and every product they bought (first name, product name, quantity)
+SELECT first_name, products.name, quantity
+FROM products INNER JOIN order_items
+ON products.product_id = order_items.product_id
+INNER JOIN orders
+ON order_items.order_id = orders.order_id
+INNER JOIN customers
+ON orders.customer_id = customers.customer_id
+WHERE city = 'Uppsala';
