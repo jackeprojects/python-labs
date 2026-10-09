@@ -75,3 +75,18 @@ INSERT INTO order_sheet VALUES
 -- If someones order gets deleted, their email also does.
 -- Nothing forces you to update an old email address if the customer enters a new one
 -- To fix I would move customer_email into customers table
+
+-- 13. Music School, Students take lessons from teachers. A lesson has a date, time, room, and instrument
+-- One teacher can teach many instruments. Underline the things
+-- Student, Teacher, Lesson
+-- Student has first name, last name
+-- Teacher has first name, last name
+-- Lesson has date, time, room, instrument
+
+-- 14. Find the relationships in the music school, Which are 1:N and which are N:M?
+-- students - lessons N:M
+-- teachers - lessons N:M
+-- students - student_lessons 1:N
+-- lessons - student_lessons 1:N
+-- teachers - teacher_lessons 1:N
+-- lessons - teacher_lessons 1:N
