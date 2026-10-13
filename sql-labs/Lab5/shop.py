@@ -47,10 +47,32 @@ def change_stock(conn):
     print("Saved!")
 
 
+def show_receipt(conn):
+    order = int(input("Order ID: "))
+    cursor = conn.execute(
+        """
+        SELECT products.name, quantity, unit_price
+        FROM products INNER JOIN order_items
+        ON products.product_id = order_items.product_id
+        WHERE order_items.order_id = ?
+        """,
+        (order,))
+    rows = cursor.fetchall()
+    if not rows:
+        print("No orders found.")
+    else:
+        total = 0
+        for name, quantity, unit_price in rows:
+            product_total = (quantity * unit_price)
+            print(f"{quantity}x {name} | {unit_price:.2f} | {product_total:.2f}")
+            total += product_total
+        print(f"Total: {total:.2f}")
+    
+
 def main():
     conn = connect()
     while True:
-        print("\n1) List products  2) Search customers  3) Add product  4) Change stock  0) Quit")
+        print("\n1) List products  2) Search customers  3) Add product  4) Change stock  5) Show receipt  0) Quit")
         choice = input("> ")
         if choice == "1":
             list_products(conn)
@@ -60,6 +82,8 @@ def main():
             add_product(conn)
         elif choice == "4":
             change_stock(conn)
+        elif choice == "5":
+            show_receipt(conn)
         elif choice == "0":
             break
     conn.close()
