@@ -71,12 +71,27 @@ def show_receipt(conn):
             print(f"{quantity}x {name} | {unit_price:.2f} | {product_total:.2f}")
             total += product_total
         print(f"Total: {total:.2f}")
-    
+
+
+def show_best_sellers(conn):
+    cursor = conn.execute(
+        """
+        SELECT name, SUM(order_items.quantity) AS total_sold
+        FROM order_items
+        JOIN products ON order_items.product_id = products.product_id
+        GROUP BY products.product_id, name
+        ORDER BY total_sold DESC
+        LIMIT 3
+        """)
+    rows = cursor.fetchall()
+    for name, total_sold in rows:
+        print(f"{name} | Sold: {total_sold}")
+
 
 def main():
     conn = connect()
     while True:
-        print("\n1) List products  2) Search customers  3) Add product  4) Change stock  5) Show receipt  0) Quit")
+        print("\n1) List products\n2) Search customers\n3) Add product\n4) Change stock\n5) Show receipt\n6) Show Best-sellers\n0) Quit")
         choice = input("> ")
         if choice == "1":
             list_products(conn)
@@ -88,6 +103,8 @@ def main():
             change_stock(conn)
         elif choice == "5":
             show_receipt(conn)
+        elif choice == "6":
+            show_best_sellers(conn)
         elif choice == "0":
             break
     conn.close()
