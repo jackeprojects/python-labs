@@ -1,3 +1,4 @@
 sql-labs/webshop.db
 sql-labs/music.db
+mongo-labs/seed_webshop.py
 __pycache__/
