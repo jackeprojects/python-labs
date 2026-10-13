@@ -27,7 +27,11 @@ def search_customers(conn):
 def add_product(conn):
     name = input("Name: ")
     category = input("Category: ")
-    price = float(input("Price: "))
+    try:  # Not having input validation raises a ValueError when inputting text
+        price = float(input("Price: "))
+    except ValueError:
+        print("Price needs to be a number.")
+        return
     stock = int(input("Stock: "))
     conn.execute(
         "INSERT INTO products (name, category, price, stock) VALUES (?, ?, ?, ?)",
