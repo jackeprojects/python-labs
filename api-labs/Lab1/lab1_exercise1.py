@@ -56,3 +56,9 @@ if response.ok:
     print(response.json())
 else:
     print(f"Could not update product: {response.status_code}")
+
+
+# 5. Break it on purpose
+get_json("https://fakestoreapi.com/produkt")  # Error: 404
+get_json("https://fakestoreapi.com/products", timeout=0.001)  # The request has timed out
+get_json("https://superfakedomain64.com")  # Could not reach the server
