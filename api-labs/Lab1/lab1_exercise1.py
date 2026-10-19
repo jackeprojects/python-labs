@@ -1,4 +1,5 @@
 from api_client import get_json
+import requests
 
 # 1. Sort products by price
 products = get_json("https://fakestoreapi.com/products")
@@ -29,3 +30,20 @@ if chosen_category:
 
 # 3. Move get_json to its own file
 # get_json has been moved into api_client.py
+
+
+# 4. Create and change a product
+new_product = {
+    "title": "RTX 5090",
+    "price": 999999,
+    "description": "A Graphics Card",
+    "category": "electronics",
+    "image": "https://cdn.inet.se/img/800x10000/cms/55413314-e5f2-4420-bac7-8cc4b619330e.webp"
+}
+
+response = requests.post("https://fakestoreapi.com/products", json=new_product, timeout=5)
+if response.ok:
+    print(response.status_code)
+    print(response.json())
+else:
+    print(f"Could not create product: {response.status_code}")
