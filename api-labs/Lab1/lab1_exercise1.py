@@ -47,3 +47,12 @@ if response.ok:
     print(response.json())
 else:
     print(f"Could not create product: {response.status_code}")
+
+updated_price = {"price": 9}
+
+response = requests.patch("https://fakestoreapi.com/products/7", json=updated_price, timeout=5)
+if response.ok:
+    print(response.status_code)
+    print(response.json())
+else:
+    print(f"Could not update product: {response.status_code}")
