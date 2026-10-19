@@ -1,21 +1,4 @@
-import requests
-
-def get_json(url, params=None, headers=None, timeout=5):
-    try:
-        response = requests.get(url, params=params, headers=headers, timeout=timeout)
-        response.raise_for_status()
-        return response.json()
-    except requests.exceptions.Timeout:
-        print("The request has timed out")
-    except requests.exceptions.ConnectionError:
-        print("Could not reach the server")
-    except requests.exceptions.HTTPError as error:
-        print(f"Error: {error.response.status_code}")
-    except requests.exceptions.JSONDecodeError:
-        print("Response was not JSON")
-    except requests.exceptions.RequestException as error:
-        print(f"Something went wrong: {type(error).__name__}")
-    return None
+from api_client import get_json
 
 # 1. Sort products by price
 products = get_json("https://fakestoreapi.com/products")
@@ -42,3 +25,7 @@ if chosen_category:
         print(f"Cheapest product: {sorted_category[-1]['title']}: {sorted_category[-1]['price']}")
     else:
         print("That category does not exist")
+
+
+# 3. Move get_json to its own file
+# get_json has been moved into api_client.py
