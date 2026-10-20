@@ -37,3 +37,15 @@ response = requests.get(f"https://api.github.com/users/{user_input}/repos",
                         params={"sort": "pushed", "per_page": 5},
                         timeout=5)
 print(response.headers["X-RateLimit-Limit"])  # Prints 60
+
+
+# 5. Break the token on purpose
+bad_token = gh_token + "s"
+response = requests.get(f"https://api.github.com/users/{user_input}/repos",
+                        params={"sort": "pushed", "per_page": 5},
+                        headers={"Authorization": f"Bearer {bad_token}"},
+                        timeout=5)
+print(response.json())  # Bad credentials: 401
+
+# 401 means server doesn't know who I am
+# 403 means server knows me but I don't have permissions
