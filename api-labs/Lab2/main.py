@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
 
 # 1. Start the server
 app = FastAPI()
@@ -35,3 +36,21 @@ def get_movie(movie_id: int):
 
 # 3. Filter with a query parameter
 # See get_movies function ^
+
+
+# 4. Add a movie
+class Movie(BaseModel):
+    title: str
+    director: str
+    year: int
+
+@app.post("/movies", status_code=201)
+def create_movie(movie: Movie):
+    new_id = max((m["id"] for m in movies), default=0) + 1
+    new_movie = {"id": new_id, "title": movie.title, "director": movie.director, "year": movie.year}
+    movies.append(new_movie)
+    return new_movie
+
+# Creating a movie without a director returns 422
+# Creating a movie with year written as text returns 201, successfully converting text to int
+# Inside the "detail"-field of the error message
