@@ -24,10 +24,7 @@ def get_movies(director: str | None = None, year: int | None = None):  # Step 3:
 # 2. Get one movie
 @app.get("/movies/{movie_id}")
 def get_movie(movie_id: int):
-    for movie in movies:
-        if movie["id"] == movie_id:
-            return movie
-    raise HTTPException(status_code=404, detail="No movie with that ID")
+    return find_movie(movie_id)
 
 # Testing ID used by a movie returns 200
 # Testing ID that isn't used by a movie returns 404
@@ -54,3 +51,29 @@ def create_movie(movie: Movie):
 # Creating a movie without a director returns 422
 # Creating a movie with year written as text returns 201, successfully converting text to int
 # Inside the "detail"-field of the error message
+
+
+# 5. Replace and remove
+def find_movie(movie_id: int):
+    for movie in movies:
+        if movie["id"] == movie_id:
+            return movie
+    raise HTTPException(status_code=404, detail="No movie with that ID")
+
+@app.put("/movies/{movie_id}")
+def replace_movie(movie_id: int, movie: Movie):
+    found_movie = find_movie(movie_id)
+    found_movie["title"] = movie.title
+    found_movie["director"] = movie.director
+    found_movie["year"] = movie.year
+    return found_movie
+
+@app.delete("/movies/{movie_id}", status_code=204)
+def delete_movie(movie_id: int):
+    found_movie = find_movie(movie_id)
+    movies.remove(found_movie)
+
+# Deleting the same movie twice returns 404,
+# since the movie isn't in the list anymore and ID doesnt rearrange
+
+# Restarting the server reverts changes since it doesnt get saved
