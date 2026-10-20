@@ -1,0 +1,25 @@
+from api_client import get_json
+from dotenv import load_dotenv
+import os
+
+# 1. Create token
+# Created a fine-grained PAT
+
+# 2. Store it safely
+# Stored it in .env file
+
+# 3. Call the API with the token
+load_dotenv()
+gh_token = os.getenv("GITHUB_TOKEN")
+
+user_input = input("Enter a GitHub username: ")
+repos = get_json(f"https://api.github.com/users/{user_input}/repos",
+                 params={"sort": "pushed", "per_page": 5},
+                 headers={"Authorization": f"Bearer {gh_token}"})
+
+if repos is not None:
+    if repos:
+        for repo in repos:
+            print(repo["name"])
+    else:
+        print("User does not have any public repos")
