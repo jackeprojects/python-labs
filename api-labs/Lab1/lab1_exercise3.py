@@ -49,3 +49,11 @@ print(response.json())  # Bad credentials: 401
 
 # 401 means server doesn't know who I am
 # 403 means server knows me but I don't have permissions
+
+
+# 6. Check that the secret is safe
+# git has .env in .gitignore, therefore git is not tracking it
+
+
+# 7. Delete the token
+# Token has been deleted
