@@ -11,8 +11,13 @@ movies = [
 ]
 
 @app.get("/movies")
-def get_movies():
-    return movies
+def get_movies(director: str | None = None, year: int | None = None):  # Step 3: Filter with optional params
+    result = movies
+    if director is not None:
+        result = [movie for movie in result if director.lower() in movie["director"].lower()]
+    if year is not None:
+        result = [movie for movie in result if movie["year"] == year]
+    return result
 
 
 # 2. Get one movie
@@ -26,3 +31,7 @@ def get_movie(movie_id: int):
 # Testing ID used by a movie returns 200
 # Testing ID that isn't used by a movie returns 404
 # Testing ID with invalid chars returns 422
+
+
+# 3. Filter with a query parameter
+# See get_movies function ^
