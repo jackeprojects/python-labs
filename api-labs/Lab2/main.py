@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 
 # 1. Start the server
 app = FastAPI()
@@ -13,3 +13,16 @@ movies = [
 @app.get("/movies")
 def get_movies():
     return movies
+
+
+# 2. Get one movie
+@app.get("/movies/{movie_id}")
+def get_movie(movie_id: int):
+    for movie in movies:
+        if movie["id"] == movie_id:
+            return movie
+    raise HTTPException(status_code=404, detail="No movie with that ID")
+
+# Testing ID used by a movie returns 200
+# Testing ID that isn't used by a movie returns 404
+# Testing ID with invalid chars returns 422
