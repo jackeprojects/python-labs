@@ -1,6 +1,7 @@
 from api_client import get_json
 from dotenv import load_dotenv
 import os
+import requests
 
 # 1. Create token
 # Created a fine-grained PAT
@@ -23,3 +24,16 @@ if repos is not None:
             print(repo["name"])
     else:
         print("User does not have any public repos")
+
+
+# 4. Prove that the token is used
+response = requests.get(f"https://api.github.com/users/{user_input}/repos",
+                        params={"sort": "pushed", "per_page": 5},
+                        headers={"Authorization": f"Bearer {gh_token}"},
+                        timeout=5)
+print(response.headers["X-RateLimit-Limit"])  # Prints 5000
+
+response = requests.get(f"https://api.github.com/users/{user_input}/repos",
+                        params={"sort": "pushed", "per_page": 5},
+                        timeout=5)
+print(response.headers["X-RateLimit-Limit"])  # Prints 60
