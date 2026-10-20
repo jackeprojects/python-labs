@@ -24,7 +24,9 @@ def find_city(city):
     data = get_json("https://geocoding-api.open-meteo.com/v1/search",
                     params={"name": city, "count": 1})
     if data:
-        return data["results"][0]
+        if "results" in data:  # Step 4: Handle non-existant cities
+                return data["results"][0]
+    print("Could not find city")
 
 def get_weather(lat, lon):
     data = get_json("https://api.open-meteo.com/v1/forecast",
@@ -33,22 +35,29 @@ def get_weather(lat, lon):
                             "current": "temperature_2m,wind_speed_10m"})
     if data:
         return data
+    print("Could not get weather")
 
 user_input = input("Name a city: ")
 
 city = find_city(user_input)
-lat = city["latitude"]
-lon = city["longitude"]
+if city != None:
+        lat = city["latitude"]
+        lon = city["longitude"]
 
-weather = get_weather(lat, lon)
+        weather = get_weather(lat, lon)
+        if weather != None:
+                city_name = city["name"]
+                city_country = city["country"]
 
-city_name = city["name"]
-city_country = city["country"]
+                temp = weather["current"]["temperature_2m"]
+                temp_unit = weather["current_units"]["temperature_2m"]
 
-temp = weather["current"]["temperature_2m"]
-temp_unit = weather["current_units"]["temperature_2m"]
+                wind = weather["current"]["wind_speed_10m"]
+                wind_unit = weather["current_units"]["wind_speed_10m"]
 
-wind = weather["current"]["wind_speed_10m"]
-wind_unit = weather["current_units"]["wind_speed_10m"]
+                print(f"{city_name}, {city_country}: {temp}{temp_unit}, wind {wind} {wind_unit}")
 
-print(f"{city_name}, {city_country}: {temp}{temp_unit}, wind {wind} {wind_unit}")
+
+# 4. Handle a city that does not exist
+print(find_city("asdfk"))
+# Check side-comment in find_city() func
