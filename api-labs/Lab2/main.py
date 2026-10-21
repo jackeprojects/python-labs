@@ -52,7 +52,7 @@ class Movie(BaseModel):
     director: str
     year: int
 
-@app.post("/movies", status_code=201)
+@app.post("/movies", status_code=201, dependencies=[Depends(check_key)])  # Exercise 3; step 4 - route protection
 def create_movie(movie: Movie):
     new_id = max((m["id"] for m in movies), default=0) + 1
     new_movie = {"id": new_id, "title": movie.title, "director": movie.director, "year": movie.year}
@@ -71,7 +71,7 @@ def find_movie(movie_id: int):
             return movie
     raise HTTPException(status_code=404, detail="No movie with that ID")
 
-@app.put("/movies/{movie_id}")
+@app.put("/movies/{movie_id}", dependencies=[Depends(check_key)])  # Exercise 3; step 4 - route protection
 def replace_movie(movie_id: int, movie: Movie):
     found_movie = find_movie(movie_id)
     found_movie["title"] = movie.title
@@ -79,7 +79,7 @@ def replace_movie(movie_id: int, movie: Movie):
     found_movie["year"] = movie.year
     return found_movie
 
-@app.delete("/movies/{movie_id}", status_code=204)
+@app.delete("/movies/{movie_id}", status_code=204, dependencies=[Depends(check_key)])  # Exercise 3; step 4 - route protection
 def delete_movie(movie_id: int):
     found_movie = find_movie(movie_id)
     movies.remove(found_movie)
@@ -102,7 +102,7 @@ class MovieUpdate(BaseModel):
     director: str | None = None
     year: int | None = None
 
-@app.patch("/movies/{movie_id}")
+@app.patch("/movies/{movie_id}", dependencies=[Depends(check_key)])  # Exercise 3; step 4 - route protection
 def update_movie(movie_id: int, movie_update: MovieUpdate):
     found_movie = find_movie(movie_id)
     found_movie.update(movie_update.model_dump(exclude_unset=True))
@@ -146,3 +146,7 @@ def update_movie(movie_id: int, movie_update: MovieUpdate):
 
 # 3. Write the check
 # Check top of file ^
+
+
+# 4. Protect the routes that change data
+# Added dependencies to app decorators
