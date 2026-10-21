@@ -77,3 +77,23 @@ def delete_movie(movie_id: int):
 # since the movie isn't in the list anymore and ID doesnt rearrange
 
 # Restarting the server reverts changes since it doesnt get saved
+
+
+# 6. Call your own API from Python
+# See api_client.py and client.py
+
+
+# EXERCISE 2
+
+# 1. Write the model and the route
+class MovieUpdate(BaseModel):
+    title: str | None = None
+    director: str | None = None
+    year: int | None = None
+
+@app.patch("/movies/{movie_id}")
+def update_movie(movie_id: int, movie_update: MovieUpdate):
+    found_movie = find_movie(movie_id)
+    found_movie.update(movie_update.model_dump(exclude_unset=True))
+
+    return found_movie
