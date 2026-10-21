@@ -121,3 +121,9 @@ def update_movie(movie_id: int, movie_update: MovieUpdate):
 
 # .patch is when i wanna update less than all fields of a Movie
 # since i can choose how many fields i fill
+
+
+# EXERCISE 3
+
+# 1. Create the key and keep it safe
+# Created .env file with API key in it
