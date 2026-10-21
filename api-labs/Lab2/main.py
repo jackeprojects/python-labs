@@ -1,5 +1,10 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+api_key = os.getenv("API_KEY")  # Exercise 3; step 2 - load env
 
 # 1. Start the server
 app = FastAPI()
@@ -127,3 +132,7 @@ def update_movie(movie_id: int, movie_update: MovieUpdate):
 
 # 1. Create the key and keep it safe
 # Created .env file with API key in it
+
+
+# 2. Read the key in your API
+# Check top of file^
