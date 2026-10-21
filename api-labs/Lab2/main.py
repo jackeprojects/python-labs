@@ -1,10 +1,16 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Header, Depends
 from pydantic import BaseModel
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 api_key = os.getenv("API_KEY")  # Exercise 3; step 2 - load env
+
+def check_key(x_api_key: str | None = Header(default=None)):  # Exercise 3; step 3 - write check
+    if not api_key:
+        raise HTTPException(status_code=401, detail="No API key exists")
+    if x_api_key != api_key:
+        raise HTTPException(status_code=401, detail="Invalid API Key")
 
 # 1. Start the server
 app = FastAPI()
@@ -136,3 +142,7 @@ def update_movie(movie_id: int, movie_update: MovieUpdate):
 
 # 2. Read the key in your API
 # Check top of file^
+
+
+# 3. Write the check
+# Check top of file ^
