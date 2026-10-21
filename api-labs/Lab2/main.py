@@ -103,3 +103,13 @@ def update_movie(movie_id: int, movie_update: MovieUpdate):
 # Using .patch to update a movie and only sending year
 # returns 200 - confirming it works.
 # Checking same movie with .get shows that year has been updated
+
+
+# 3. Test the edges
+# Updating a movie with an empty body returns 200
+# but doesnt change anything
+
+# Updating a movie with year written as text returns 200
+# but only if text is a number
+
+# Updating a movie with non-existent id returns 404
