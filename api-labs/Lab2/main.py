@@ -160,3 +160,11 @@ def update_movie(movie_id: int, movie_update: MovieUpdate):
 
 # Changing one char from correct api key and entering it
 # returns 401
+
+
+# 6. Use the key from Python
+# Check client.py module
+
+
+# 7. Check that the secret is safe
+# .env is not in git status list
