@@ -113,3 +113,11 @@ def update_movie(movie_id: int, movie_update: MovieUpdate):
 # but only if text is a number
 
 # Updating a movie with non-existent id returns 404
+
+
+# 4. Explain the difference
+# .put is when i wanna change all fields of a Movie,
+# since .put needs all fields to be filled
+
+# .patch is when i wanna update less than all fields of a Movie
+# since i can choose how many fields i fill
