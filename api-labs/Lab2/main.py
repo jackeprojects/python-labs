@@ -97,3 +97,9 @@ def update_movie(movie_id: int, movie_update: MovieUpdate):
     found_movie.update(movie_update.model_dump(exclude_unset=True))
 
     return found_movie
+
+
+# 2.
+# Using .patch to update a movie and only sending year
+# returns 200 - confirming it works.
+# Checking same movie with .get shows that year has been updated
