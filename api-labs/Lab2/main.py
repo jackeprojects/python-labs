@@ -150,3 +150,13 @@ def update_movie(movie_id: int, movie_update: MovieUpdate):
 
 # 4. Protect the routes that change data
 # Added dependencies to app decorators
+
+
+# 5. Test it
+# Leaving the api key field empty while creating a Movie
+# returns 401 with detail="Invalid API Key"
+
+# Entering correct api key returns 201
+
+# Changing one char from correct api key and entering it
+# returns 401
