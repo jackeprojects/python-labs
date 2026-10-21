@@ -99,7 +99,7 @@ def update_movie(movie_id: int, movie_update: MovieUpdate):
     return found_movie
 
 
-# 2.
+# 2. Test that only one field changes
 # Using .patch to update a movie and only sending year
 # returns 200 - confirming it works.
 # Checking same movie with .get shows that year has been updated
