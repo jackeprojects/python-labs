@@ -5,3 +5,4 @@ mongo-labs/seed_webshop.py
 __pycache__/
 listings.csv
 loans.csv
+loans_clean.csv
