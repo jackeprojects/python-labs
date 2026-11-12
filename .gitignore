@@ -4,3 +4,4 @@ mongo-labs/seed_webshop.py
 .env
 __pycache__/
 listings.csv
+loans.csv
