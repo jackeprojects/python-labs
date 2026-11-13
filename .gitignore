@@ -6,3 +6,5 @@ __pycache__/
 listings.csv
 loans.csv
 loans_clean.csv
+library_members.csv
+library_loans_clean.csv
